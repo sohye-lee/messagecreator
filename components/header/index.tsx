@@ -8,7 +8,7 @@ import { IconLogin } from '@tabler/icons-react';
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 z-50 flex items-center justify-between w-full h-14 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
+    <header className="bg-white fixed top-0 left-0 z-50 flex items-center justify-between w-full h-14 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
       <div className="flex items-center">
         <a rel="nofollow" href="/new">
           <Image
