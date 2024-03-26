@@ -13,9 +13,43 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+model User {
+  id         String    @id @default(cuid())
+  externalId String   @unique
+  attributes Json
+  chats      Chat[]
+  threads    Thread[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Chat {
+  id        String @id @default(cuid())
+  question  String 
+  answer    String?
+  userId    String
+  threadId  String
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  thread    Thread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Thread {
+  id        String @id @default(cuid())
+  text      String 
+  userId    String
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chats     Chat[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
 model message {
-  id  String @id @default(cuid())
+  id        String @id @default(cuid())
   content   String 
-  createAt  DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

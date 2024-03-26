@@ -6,6 +6,7 @@ import React from "react";
 import { Providers } from "./providers";
 import Footer from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Blinkless AI Message Generator | Multi-Format Chatbot Conversations",
@@ -50,7 +51,7 @@ export default function RootLayout({
         </head>
         <body className={`${GeistSans.className} ${GeistMono.variable} p-0`}>
           <Providers>
-            {/* <Header />ㄴ */}
+            <Toaster richColors closeButton />
             {children}
             <Footer />
           </Providers>

@@ -1,14 +1,14 @@
-import { metadata } from '@/lib/constants';
-import Image from 'next/image';
-import LogoBlack from '@images/logo-black.svg';
-import LogoBlackLong from '@images/logo-black-long.svg';
-import LogoWhite from '@images/logo-white.svg';
-import LogoWhiteLong from '@images/logo-white-long.svg';
-import Link from 'next/link';
-import React from 'react';
-import { Button } from '@/components/ui/button';
+import { metadata } from "@/lib/constants";
+import Image from "next/image";
+import LogoBlack from "@images/logo-black.svg";
+
+import Link from "next/link";
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { auth, SignIn } from "@clerk/nextjs";
 
 export default function Home() {
+  const {} = auth();
   return (
     <main className="flex min-h-screen pt-6 pb-16 flex-col items-center p-0 m-0 bg-[#f8f8fd] dark:bg-background justify-center px-4">
       <div className="max-w-[599px] flex items-center justify-center flex-col gap-3">
@@ -20,7 +20,9 @@ export default function Home() {
           {metadata.title}
         </h1>
         <p className="text-md font-light text-center">{metadata.description}</p>
-        <Button className="mt-4">Get Started</Button>
+        <Link href="/chat">
+          <Button className="mt-4">Get Started</Button>
+        </Link>
       </div>
     </main>
   );

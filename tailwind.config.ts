@@ -19,6 +19,7 @@ const config = {
     },
     extend: {
       colors: {
+        brand: "var(--brand)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -67,10 +68,36 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "slide-right": {
+          from: { transform: "translateX(-100%)" },
+          "30%": { transform: "translateX(-100%)" },
+
+          to: { transform: "translateX(0)" },
+        },
+        "bounce-once": {
+          "0%": {
+            transform: "translateY(-25%)",
+            animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "25%": {
+            transform: "translateY(0)",
+            animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+          },
+          "75%": {
+            transform: "translateY(-25%)",
+            animationTimingFunction: "cubic-bezier(0.8, 0, 1, 1)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            // animationTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-right": "slide-right 1s  ease",
+        "bounce-once": "bounce-once 0.6s ease-out",
       },
     },
   },
