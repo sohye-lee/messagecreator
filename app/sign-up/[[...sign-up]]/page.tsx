@@ -1,4 +1,4 @@
-import AuthContainer from '@/components/container/authContainer';
+import AuthContainer from '@components/container/authContainer';
 import { SignUp } from '@clerk/nextjs';
 
 export default function Page() {

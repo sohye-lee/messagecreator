@@ -1,4 +1,5 @@
 import React from 'react';
+import FullLoader from '../../../components/loading/fullLoader';
 
 export default function DashboardPage() {
   return (
@@ -8,8 +9,6 @@ export default function DashboardPage() {
       data-panel-group-direction="horizontal"
       data-panel-group-id=":r18:"
       data-panel-group-units="percentages"
-    >
-    
-    </div>
+    ></div>
   );
 }
