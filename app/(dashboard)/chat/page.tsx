@@ -52,7 +52,7 @@ export default function ChatPage() {
 
   useEffect(() => {
     messages.length == 0 && initiate();
-  }, []);
+  }, [initiate, messages.length]);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className="group w-full overflow-auto flex flex-col items-center">

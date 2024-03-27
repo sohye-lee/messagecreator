@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconRobotFace } from "@tabler/icons-react";
 import { ChatCompletionContentPart } from "openai/resources/chat/completions.mjs";
 import { useMutation } from "@tanstack/react-query";
@@ -22,12 +22,11 @@ export default function ChatItem({ role, content }: ChatItemProps) {
   });
 
   useEffect(() => {
-    mutate();
-  }, []);
+    image == "" && mutate();
+  }, [image, mutate]);
   return (
     <div className="group relative flex items-start w-full py-4 px-3 border-t border-t-slate-100 ">
       {role == "user" ? (
-        // <ProfileIcon />
         <div
           className={`w-8 h-8 relative border border-gray-300 bg-gray-50 border-md flex items-center justify-center rounded-md bg-brand/25`}
         >
