@@ -1,7 +1,12 @@
 import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  publicRoutes: ["/", "/api/webhooks(.*)", "/api/webhooks/user(.*)"],
+  publicRoutes: [
+    "/",
+    "/api/webhooks(.*)",
+    "/api/webhooks/user(.*)",
+    "/api/users/me(.*)",
+  ],
 });
 
 export const config = {
@@ -10,6 +15,6 @@ export const config = {
     // Exclude files in the _next directory, which are Next.js internals.
     "/((?!.+\\.[\\w]+$|_next).*)",
     // Re-include any files in the api or trpc folders that might have an extension
-    // "/(api|trpc)(.*)",
+    "/(api|trpc)(.*)",
   ],
 };

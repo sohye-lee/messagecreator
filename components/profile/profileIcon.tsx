@@ -1,3 +1,4 @@
+"use server";
 import { auth, currentUser } from "@clerk/nextjs";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

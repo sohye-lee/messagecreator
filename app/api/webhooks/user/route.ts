@@ -34,16 +34,16 @@ async function handler(request: Request) {
   const eventType: EventType = evt.type;
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
-    console.log("id:", id);
-    console.log("attributes:", attributes);
     const user = await db.user.upsert({
       where: { externalId: id as string },
       create: {
         externalId: id as string,
         attributes,
+        image: attributes.image_url.toString(),
       },
-      update: { attributes },
+      update: { attributes, image: attributes.image_url.toString() },
     });
+    console.log("user updated:", user);
     return NextResponse.json({ ok: true, user });
   }
   return NextResponse.json({ ok: true });

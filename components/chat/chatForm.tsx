@@ -1,22 +1,28 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import { IconCornerDownLeft } from "@tabler/icons-react";
+import { useMutation } from "@tanstack/react-query";
+import { generateChatResponse } from "@/utils/action";
+import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
+import { toast } from "sonner";
+
 interface props {
+  question: string;
   setQuestion: (value: string) => void;
-  question?: string | null | undefined;
-  //   onSubmit: (e: FormEvent) => void;
-  [key: string]: any;
+  // messages: ChatCompletionMessageParam[];
+  // setMessages: (values: ChatCompletionMessageParam[]) => void;
+  handleSubmit: (e: FormEvent) => void;
+  isLoading: boolean;
 }
+
 export default function ChatForm({
-  setQuestion,
   question,
-  //   onSubmit,
-  ...rest
+  setQuestion,
+  // messages,
+  // setMessages,
+  handleSubmit,
+  isLoading = false,
 }: props) {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log(question);
-  };
   return (
     <div className="fixed inset-x-0 bottom-0 pb-8 w-full  duration-300 ease-in-out animate-in  ">
       <div className="mx-auto sm:max-w-2xl  ">
@@ -44,7 +50,7 @@ export default function ChatForm({
                   className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 size-9"
                   type="submit"
                   data-state="closed"
-                  //   disabled
+                  disabled={isLoading}
                 >
                   <IconCornerDownLeft width={20} />
 
