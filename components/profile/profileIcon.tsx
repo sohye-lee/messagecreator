@@ -14,8 +14,10 @@ export default async function ProfileIcon({ link, long }: props) {
   return (
     <Link href={link ?? "#"} className="flex items-center gap-2">
       <Avatar className="w-8 h-8 border border-white">
-        {user?.hasImage && <AvatarImage src={user?.imageUrl} />}
-        <AvatarFallback className="text-[9px] text-white bg-gradient-to-br from-brand to-slate-400">
+        {user?.hasImage && (
+          <AvatarImage src={user?.imageUrl} className="h-auto object-cover'" />
+        )}
+        <AvatarFallback className="text-[9px] text-white bg-gradient-to-br from-brand to-sky-400">
           {user?.firstName ? user?.firstName?.slice(0, 2) : "Me"}
         </AvatarFallback>
       </Avatar>
