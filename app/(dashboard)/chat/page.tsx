@@ -1,31 +1,32 @@
-"use client";
-import React, { FormEvent, useEffect, useState } from "react";
-import ChatList from "@/components/chat/chatList";
+'use client';
+import React, { FormEvent, useEffect, useState } from 'react';
+import ChatList from '@/components/chat/chatList';
 import {
   QueryClient,
   dehydrate,
   HydrationBoundary,
   useMutation,
-} from "@tanstack/react-query";
-import ChatForm from "@/components/chat/chatForm";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
-import { generateChatResponse, initiateChat } from "@/utils/action";
-import { toast } from "sonner";
+} from '@tanstack/react-query';
+import ChatForm from '@/components/chat/chatForm';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions.mjs';
+import { generateChatResponse, initiateChat } from '@/utils/action';
+import { toast } from 'sonner';
 
 export default function ChatPage() {
   const queryClient = new QueryClient();
-
-  const [question, setQuestion] = useState<string>("");
+  const [step, setStep] = useState<number>(0);
+  
+  const [question, setQuestion] = useState<string>('');
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
   const { mutate: sendMessages, isPending } = useMutation({
     mutationFn: (query: ChatCompletionMessageParam) =>
       generateChatResponse([...messages, query]),
     onSuccess: (data: ChatCompletionMessageParam) => {
       if (!data) {
-        toast.error("Something went wrong.");
+        toast.error('Something went wrong.');
         return;
       }
-      console.log("received and all:", data);
+      console.log('received and all:', data);
       setMessages((prev) => [...prev, data]);
       console.log(messages);
     },
@@ -42,12 +43,12 @@ export default function ChatPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const query: ChatCompletionMessageParam = {
-      role: "user",
+      role: 'user',
       content: question,
     };
     sendMessages(query);
     setMessages((prev) => [...prev, query]);
-    setQuestion("");
+    setQuestion('');
   };
 
   useEffect(() => {

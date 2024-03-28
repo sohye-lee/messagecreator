@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   QueryClient,
   dehydrate,
   HydrationBoundary,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 
-export default function MessagesPage() {
+export default function HistoryPage() {
   const queryClient = new QueryClient();
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div>MessagesPage</div>
+      <div>All Message History</div>
     </HydrationBoundary>
   );
 }
