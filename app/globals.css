@@ -77,3 +77,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+ol {
+  list-style: decimal !important;
+  padding-left: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+ol li {
+  margin: 0.5rem 0;
+}

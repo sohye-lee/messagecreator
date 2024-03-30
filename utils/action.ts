@@ -1,5 +1,6 @@
 'use server';
 import { env } from '@/lib/env';
+import { MessageInfo } from '@/lib/types';
 import { db } from '@/prisma/db';
 import { auth } from '@clerk/nextjs';
 import OpenAi from 'openai';
@@ -32,19 +33,32 @@ export const generateChatResponse = async (
   }
 };
 
-export const initiateChat = async () => {
+export const initiateChat = async (messageInfo: MessageInfo) => {
   try {
     const response = await openai.chat.completions.create({
       messages: [
         {
           role: 'system',
           content:
-            'You are a helpful assistant who helps with writing other messages for email, cards and texts',
+            'You are a helpful assistant who helps with writing other messages for email, cards and texts. Return all the responses in HTML format, and when you return a list, please return it as a HTML numbered list.',
         },
         {
-          role: 'user',
-          content:
-            'Please say hi to the user who just entered in 2-3 sentences. Introduce yourself as an assistant who help write messages for cards, emails, letters or texts in any occasion, event or purpose. Create your own way to say hi.',
+          role: 'assistant',
+          content: `Please say hi to the user who just entered in 1-2 sentences. 
+            Introduce yourself as an assistant who help write messages for cards, emails, letters or texts in any occasion, event or purpose. 
+            Create your own way to say hi. \n
+            Then provide  10 numbered list of the messages you create based on the information on the message given below:\n
+            Purpose: ${messageInfo.purpose}, 
+            Occasion: ${messageInfo.occasion}, 
+            Relation of the user to the person that receives this message: ${messageInfo.relation}, 
+            Tone: ${messageInfo.tone}, 
+            Length: ${messageInfo.length},
+            Urgency: ${messageInfo.urgency}, 
+            Theme: ${messageInfo.theme}, 
+            Other details from user: ${messageInfo.details}, \n
+            And then please ask the user if there is any other thing to discuss or modify or edit on the message list that you provided.
+            Please be friendly and *important: Please provide your response in HTML code, and for the list of the message, please number each them in HTML numbered list(<ol><li></li></ol>) and give some double space between them.
+            `,
         },
       ],
       model: 'gpt-3.5-turbo',

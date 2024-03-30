@@ -1,10 +1,10 @@
-"use client";
-import React, { FormEvent, useState } from "react";
-import ProfileIcon from "../profile/profileIcon";
-import ChatItem from "./chatItem";
-import ChatForm from "./chatForm";
-import { IconArrowDown } from "@tabler/icons-react";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
+'use client';
+import React, { FormEvent, useState } from 'react';
+import ProfileIcon from '../profile/profileIcon';
+import ChatItem from './chatItem';
+import ChatForm from './chatForm';
+import { IconArrowDown } from '@tabler/icons-react';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions.mjs';
 
 interface props {
   messages: ChatCompletionMessageParam[];
@@ -36,11 +36,6 @@ export default function ChatList({ messages }: props) {
           <span className="sr-only">Scroll to bottom</span>
         </button>
       </div>
-      {/* <ChatForm
-      // question={question}
-      // setQuestion={setQuestion}
-      // onSubmit={handleSubmit}
-      /> */}
     </div>
   );
 }

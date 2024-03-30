@@ -6,6 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { getUserInfo } from '@/utils/action';
 import Image from 'next/image';
 import Logo from '@/public/images/logo-black.svg';
+import parse from 'html-react-parser';
 
 interface ChatItemProps {
   role: 'function' | 'system' | 'user' | 'assistant' | 'tool';
@@ -17,7 +18,6 @@ export default function ChatItem({ role, content }: ChatItemProps) {
   const { mutate, isPending } = useMutation({
     mutationFn: () => getUserInfo(),
     onSuccess: (data) => {
-      console.log(data?.user);
       setImage(data?.user?.image ?? '');
     },
   });
@@ -26,7 +26,7 @@ export default function ChatItem({ role, content }: ChatItemProps) {
     image == '' && mutate();
   }, [image, mutate]);
   return (
-    <div className="group relative flex items-start w-full py-4 px-3 border-t border-t-slate-100 dark:border-t-slate-700 ">
+    <div className="group relative flex items-start w-full py-4 px-3 border last:border-none border-b-slate-100 dark:border-t-slate-700 ">
       {role == 'user' ? (
         <div
           className={`w-8 h-8 relative border border-gray-300 bg-gray-50 border-md flex items-center justify-center rounded-md bg-brand/25`}
@@ -51,8 +51,11 @@ export default function ChatItem({ role, content }: ChatItemProps) {
           />
         </div>
       )}
-      <div className="ml-1 pt-1 flex-1  overflow-hidden pl-2">
-        {content?.toString()}
+      <div
+        dangerouslySetInnerHTML={{ __html: content ?? '' }}
+        className="ml-1 pt-1 flex-1  overflow-hidden pl-2"
+      >
+        {/* {content?.toString() ?? ''} */}
       </div>
     </div>
   );
