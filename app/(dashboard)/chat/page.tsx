@@ -18,6 +18,7 @@ import Step2 from '@/components/form/step2';
 import Paginator from '@/components/form/paginator';
 import Step3 from '@/components/form/step3';
 import SmallLoader from '@/components/loading/smallLoader';
+import { IconArrowDown } from '@tabler/icons-react';
 
 const initialState = {
   purpose: '',
@@ -40,7 +41,7 @@ export default function ChatPage() {
     mutationFn: (query: ChatCompletionMessageParam) =>
       generateChatResponse([...messages, query]),
     onSuccess: (data: ChatCompletionMessageParam) => {
-      if (!data) {
+      if (!data || !data?.content) {
         toast.error('Something went wrong.');
         return;
       }
