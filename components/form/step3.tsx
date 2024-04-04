@@ -1,11 +1,11 @@
-'use client';
-import { MessageInfo } from '@/lib/types';
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Input } from '../ui/input';
-import { lengths, themes, urgencies } from '@/lib/constants';
-import { Button } from '@nextui-org/react';
-import { IconCornerDownLeft } from '@tabler/icons-react';
-import { Textarea } from '../ui/textarea';
+"use client";
+import { MessageInfo } from "@/lib/types";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Input } from "../ui/input";
+import { lengths, themes, urgencies } from "@/lib/constants";
+import { Button } from "@nextui-org/react";
+import { IconCornerDownLeft } from "@tabler/icons-react";
+import { Textarea } from "../ui/textarea";
 
 export default function Step3({
   messageInfo,
@@ -14,24 +14,24 @@ export default function Step3({
   messageInfo: MessageInfo;
   setMessageInfo: Dispatch<SetStateAction<MessageInfo>>;
 }) {
-  const [urgency, setUrgency] = useState('');
-  const [length, setLength] = useState('');
-  const [theme, setTheme] = useState('');
-  const [details, setDetails] = useState('');
+  const [urgency, setUrgency] = useState("");
+  const [length, setLength] = useState("");
+  const [theme, setTheme] = useState("");
+  const [details, setDetails] = useState("");
 
   const onLengthChange = (length: string) => {
     setMessageInfo((prev) => ({ ...prev, length }));
-    setLength('');
+    setLength("");
   };
 
   const onUrgencyChange = (urgency: string) => {
     setMessageInfo((prev) => ({ ...prev, urgency }));
-    setUrgency('');
+    setUrgency("");
   };
 
   const onThemeChange = (theme: string) => {
     setMessageInfo((prev) => ({ ...prev, theme }));
-    setUrgency('');
+    setUrgency("");
   };
 
   return (
@@ -41,9 +41,9 @@ export default function Step3({
         <div className=" mb-2 flex flex-col gap-1">
           <div className="text-lg font-medium  ">Length</div>
           <div className="py-2 px-3 text-[16px] font-light text-brand bg-gray-100 border border-gray-300 rounded-lg w-3/4">
-            {messageInfo.length != ''
+            {messageInfo.length != ""
               ? messageInfo.length
-              : 'Please select or write below'}
+              : "Please select or write below"}
           </div>
         </div>
         <div className="flex flex-wrap items-stretch gap-1">
@@ -85,9 +85,9 @@ export default function Step3({
         <div className=" mb-2 flex flex-col gap-1">
           <div className="text-lg font-medium  ">Urgency</div>
           <div className="py-2 px-3 text-[16px] font-light text-brand bg-gray-100 border border-gray-300 rounded-lg w-3/4">
-            {messageInfo.urgency != ''
+            {messageInfo.urgency != ""
               ? messageInfo.urgency
-              : 'Please select or write below'}
+              : "Please select or write below"}
           </div>
         </div>
         <div className="flex flex-wrap items-stretch gap-1">
@@ -129,9 +129,9 @@ export default function Step3({
         <div className=" mb-2 flex flex-col gap-1">
           <div className="text-lg font-medium  ">Theme</div>
           <div className="py-2 px-3 text-[16px] font-light text-brand bg-gray-100 border border-gray-300 rounded-lg w-3/4">
-            {messageInfo.theme != ''
+            {messageInfo.theme != ""
               ? messageInfo.theme
-              : 'Please select or write below'}
+              : "Please select or write below"}
           </div>
         </div>
         <div className="flex flex-wrap items-stretch gap-1">
@@ -173,13 +173,7 @@ export default function Step3({
         <div className=" mb-2 flex flex-col gap-1">
           <div className="text-lg font-medium  ">Any Other Details</div>
 
-          <form
-            className="w-full my-3 relative "
-            // onSubmit={(e) => {
-            //   e.preventDefault();
-            //   setMessageInfo((prev) => ({ ...prev, details }));
-            // }}
-          >
+          <form className="w-full my-3 relative ">
             <Textarea
               rows={3}
               className="pr-16 relative"
@@ -189,12 +183,6 @@ export default function Step3({
                 setMessageInfo((prev) => ({ ...prev, details: e.target.value }))
               }
             ></Textarea>
-            {/* <Button
-              type="submit"
-              className="absolute bottom-2 right-2   bg-black text-white dark:bg-brand dark:text-black dark:hover:bg-gray-600 hover:bg-brand px-2 py-1 rounded-md "
-            >
-              <IconCornerDownLeft width={20} />
-            </Button> */}
           </form>
         </div>
       </div>

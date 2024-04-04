@@ -1,7 +1,5 @@
 import { db } from "@/prisma/db";
-import { clerkClient } from "@clerk/nextjs/server";
 import { IncomingHttpHeaders } from "http";
-import { NextApiRequest, NextApiResponse } from "next";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { Webhook, WebhookRequiredHeaders } from "svix";
@@ -43,7 +41,6 @@ async function handler(request: Request) {
       },
       update: { attributes, image: attributes.image_url.toString() },
     });
-    console.log("user updated:", user);
     return NextResponse.json({ ok: true, user });
   }
   return NextResponse.json({ ok: true });

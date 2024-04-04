@@ -2,9 +2,9 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconMessageChatbot,
-} from '@tabler/icons-react';
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Button } from '../ui/button';
+} from "@tabler/icons-react";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Button } from "../ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,8 +15,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-import { MessageInfo } from '@/lib/types';
+} from "@/components/ui/alert-dialog";
+import { MessageInfo } from "@/lib/types";
 
 interface props {
   step: number;
@@ -40,7 +40,7 @@ export default function Paginator({
       <div className="flex py-8 items-center justify-between w-full">
         <button
           className={`rounded-md py-2 px-3 flex items-center space-x-3 hover:text-brand ${
-            step <= 1 && 'opacity-10'
+            step <= 1 && "opacity-10"
           }`}
           disabled={step <= 1}
           onClick={() => {
@@ -51,21 +51,21 @@ export default function Paginator({
           <IconChevronLeft />
           <span>Previous</span>
         </button>
-        {step < 3 ? (
-          <button
-            className={`rounded-md py-2 px-3 flex items-center space-x-3 hover:text-brand ${
-              step >= 4 && 'opacity-10'
-            }`}
-            disabled={step >= 4}
-            onClick={() => {
-              step < 4 && setStep((prev) => prev + 1);
-              window.scrollTo({ top: 0 });
-            }}
-          >
-            <span>Next</span>
-            <IconChevronRight />
-          </button>
-        ) : (
+        {/* {step < 3 ? ( */}
+        <button
+          className={`rounded-md py-2 px-3 flex items-center space-x-3 hover:text-brand ${
+            step >= 4 && "opacity-10"
+          }`}
+          // disabled={step >= 4}
+          onClick={() => {
+            step < 4 && setStep((prev) => prev + 1);
+            window.scrollTo({ top: 0 });
+          }}
+        >
+          <span>Next</span>
+          <IconChevronRight />
+        </button>
+        {/* ) : (
           <AlertDialog>
             <AlertDialogTrigger>
               <Button className="bg-brand text-white hover:bg-slate-500 flex items-center gap-2">
@@ -128,7 +128,7 @@ export default function Paginator({
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-        )}
+        )} */}
       </div>
     </>
   );

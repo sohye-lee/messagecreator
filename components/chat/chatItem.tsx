@@ -1,45 +1,23 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { IconRobotFace, IconUser } from '@tabler/icons-react';
-import { ChatCompletionContentPart } from 'openai/resources/chat/completions.mjs';
-import { useMutation } from '@tanstack/react-query';
-import { getUserInfo } from '@/utils/action';
-import Image from 'next/image';
-import Logo from '@/public/images/logo-black.svg';
-import parse from 'html-react-parser';
+"use client";
+import React from "react";
+import { IconUser } from "@tabler/icons-react";
+import { ChatCompletionContentPart } from "openai/resources/chat/completions.mjs";
+import Image from "next/image";
+import Logo from "@/public/images/logo-black.svg";
 
 interface ChatItemProps {
-  role: 'function' | 'system' | 'user' | 'assistant' | 'tool';
+  role: "function" | "system" | "user" | "assistant" | "tool";
   content: string | ChatCompletionContentPart[] | null | undefined;
 }
 
 export default function ChatItem({ role, content }: ChatItemProps) {
-  // const [image, setImage] = useState<string>('');
-  // const { mutate, isPending } = useMutation({
-  //   mutationFn: () => getUserInfo(),
-  //   onSuccess: (data) => {
-  //     setImage(data?.user?.image ?? '');
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   image == '' && mutate();
-  // }, [image, mutate]);
   return (
-    <div className="group relative flex items-start w-full py-4 px-3 border last:border-none border-b-slate-100 dark:border-t-slate-700 ">
-      {role == 'user' ? (
+    <div className="group relative flex items-start w-full py-5 px-3 border-b last:border-none border-b-slate-100 dark:border-b-slate-700 ">
+      {role == "user" ? (
         <div
-          className={`w-8 h-8 relative border border-gray-300 flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-blue`}
+          className={`w-8 h-8 relative border border-gray-300 flex items-center justify-center rounded-md bg-gradient-to-r from-brand to-blue-700 text-white`}
         >
-          <IconUser width={20} />
-          {/* {image && image != '' && (
-            <Image
-              src={image}
-              alt=""
-              fill
-              className="min-w-full min-h-full w-auto h-auto group-last:animate-ping"
-            />
-          )} */}
+          <IconUser width={16} />
         </div>
       ) : (
         <div className="w-8 h-8 border border-gray-300 bg-gray-50  flex items-center justify-center rounded-md  ">
@@ -53,11 +31,9 @@ export default function ChatItem({ role, content }: ChatItemProps) {
         </div>
       )}
       <div
-        dangerouslySetInnerHTML={{ __html: content ?? '' }}
+        dangerouslySetInnerHTML={{ __html: content ?? "" }}
         className="ml-1 pt-1 flex-1  overflow-hidden pl-2"
-      >
-        {/* {content?.toString() ?? ''} */}
-      </div>
+      ></div>
     </div>
   );
 }
