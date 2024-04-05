@@ -32,7 +32,7 @@ export default function ChatItem({ role, content }: ChatItemProps) {
       )}
       <div
         dangerouslySetInnerHTML={{ __html: content ?? "" }}
-        className="ml-1 pt-1 flex-1  overflow-hidden pl-2"
+        className="response-box ml-1 pt-1 flex-1  overflow-hidden pl-2"
       ></div>
     </div>
   );

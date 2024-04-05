@@ -16,8 +16,8 @@ export default function Step3({
 }) {
   const [urgency, setUrgency] = useState("");
   const [length, setLength] = useState("");
-  const [theme, setTheme] = useState("");
-  const [details, setDetails] = useState("");
+  // const [theme, setTheme] = useState("");
+  // const [details, setDetails] = useState("");
 
   const onLengthChange = (length: string) => {
     setMessageInfo((prev) => ({ ...prev, length }));
@@ -29,10 +29,10 @@ export default function Step3({
     setUrgency("");
   };
 
-  const onThemeChange = (theme: string) => {
-    setMessageInfo((prev) => ({ ...prev, theme }));
-    setUrgency("");
-  };
+  // const onThemeChange = (theme: string) => {
+  //   setMessageInfo((prev) => ({ ...prev, theme }));
+  //   setUrgency("");
+  // };
 
   return (
     <div className="w-full flex flex-col gap-4">
@@ -125,7 +125,7 @@ export default function Step3({
       </div>
 
       {/* theme */}
-      <div className="  py-5 px-3 rounded-md flex flex-col gap-3 hover:bg-slate-100 dark:hover:bg-slate-800">
+      {/* <div className="  py-5 px-3 rounded-md flex flex-col gap-3 hover:bg-slate-100 dark:hover:bg-slate-800">
         <div className=" mb-2 flex flex-col gap-1">
           <div className="text-lg font-medium  ">Theme</div>
           <div className="py-2 px-3 text-[16px] font-light text-brand bg-gray-100 border border-gray-300 rounded-lg w-3/4">
@@ -166,7 +166,7 @@ export default function Step3({
             <IconCornerDownLeft width={20} />
           </Button>
         </form>
-      </div>
+      </div> */}
 
       {/* details */}
       <div className="  py-5 px-3 rounded-md flex flex-col gap-3 hover:bg-slate-100 dark:hover:bg-slate-800">

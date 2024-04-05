@@ -2,13 +2,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import ChatItem from "./chatItem";
 import {
-  IconArrowBack,
-  IconArrowBackUp,
   IconArrowDown,
-  IconChevronRight,
   IconMessageChatbot,
   IconReload,
-  IconShareplay,
 } from "@tabler/icons-react";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
 import { Button } from "../ui/button";
@@ -32,7 +28,6 @@ interface props {
   messages: ChatCompletionMessageParam[];
   messageInfo: MessageInfo;
   setMessageInfo: Dispatch<SetStateAction<MessageInfo>>;
-  // step: number;
   setStep: Dispatch<SetStateAction<number>>;
   ready: boolean;
   setReady: Dispatch<SetStateAction<boolean>>;
@@ -43,7 +38,6 @@ export default function ChatList({
   messages,
   messageInfo,
   setMessageInfo,
-  // step,
   setStep,
   ready,
   setReady,
@@ -67,12 +61,6 @@ export default function ChatList({
     }
   };
 
-  const startChat = () => {
-    setStep(4);
-    setReady(true);
-    // initiateChat(messageInfo);
-  };
-
   const { mutate: initiate, isPending: initiateLoading } = useMutation({
     mutationFn: () => initiateChat(messageInfo),
     onSuccess: (data: ChatCompletionMessageParam) => {
@@ -81,12 +69,18 @@ export default function ChatList({
     },
   });
 
+  const startChat = () => {
+    setReady(true);
+    initiate();
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", showButton);
+    console.log(messages);
     return () => {
       window.removeEventListener("scroll", showButton);
     };
-  }, [router]);
+  }, [router, messages]);
 
   return (
     <>
@@ -95,6 +89,7 @@ export default function ChatList({
           {messages && messages.length > 0 && ready ? (
             <>
               {messages.map((message, i) => {
+                console.log(message);
                 return (
                   <ChatItem
                     key={i}
@@ -104,18 +99,11 @@ export default function ChatList({
                 );
               })}
               <div className="flex justify-center items-stretch gap-3 mt-8">
-                {/* <Button
-                  className="hover:bg-brand gap-2 group"
-                  onClick={() => initiateChat(messageInfo)}
-                >
-                  <IconReload width={16} className="group-hover:animate-spin" />
-                  Regenerate
-                </Button> */}
                 <Button
                   className="hover:bg-brand gap-2 group"
                   onClick={() => {
+                    console.log("messages prev:", messages);
                     setMessages([]);
-                    console.log("messages:", messages);
                     setReady(false);
                     setMessageInfo(initialState);
                     setStep(1);
@@ -123,7 +111,6 @@ export default function ChatList({
                   }}
                 >
                   <IconReload width={16} className="group-hover:animate-spin" />
-                  {/* <IconArrowBackUp width={16} className="" /> */}
                   Reset
                 </Button>
               </div>
@@ -180,12 +167,12 @@ export default function ChatList({
                           {messageInfo.urgency}
                         </span>
                       </li>
-                      <li>
+                      {/* <li>
                         <span className="font-semibold">Theme</span>:{" "}
                         <span className="text-brand">{messageInfo.theme}</span>
-                      </li>
+                      </li> */}
                       <li>
-                        <span className="font-semibold">Purpose</span>:{" "}
+                        <span className="font-semibold">Details</span>:{" "}
                         <span className="text-brand">
                           {messageInfo.details}
                         </span>
@@ -203,24 +190,6 @@ export default function ChatList({
             </AlertDialog>
           )}
         </div>
-        {/* {JSON.stringify(messageInfo) !== JSON.stringify(initialState) && (
-          <div className="flex justify-center items-stretch gap-3">
-            <Button className="hover:bg-brand gap-2 group">
-              <IconReload width={16} className="group-hover:animate-spin" />
-              Regenerate
-            </Button>
-            <Button
-              className="hover:bg-brand gap-2 group"
-              onClick={() => {
-                setMessageInfo(initialState);
-                setStep(1);
-              }}
-            >
-              <IconArrowBackUp width={16} className="" />
-              Reset
-            </Button>
-          </div>
-        )} */}
       </div>
       <button
         className={`flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-brand/50 shadow-sm hover:bg-accent hover:text-accent-foreground size-9 fixed left-[50%] bottom-40 -translate-x-[50%] z-[1000] bg-background dark:bg-brand dark:opacity-80 dark:hover:opacity-95 transition-opacity duration-300 ${

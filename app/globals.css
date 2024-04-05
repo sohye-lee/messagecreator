@@ -80,11 +80,38 @@
 
 ol {
   list-style: decimal !important;
-  padding-left: 1.5rem;
+  /* padding-left: 1.5rem; */
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
 ol li {
-  margin: 0.5rem 0;
+  /* margin: 0.5rem 0; */
+}
+
+.response-box ol,
+.response-box ul {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5em;
+  list-style: none !important;
+}
+
+.response-box li {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.response-box li:hover {
+  border: 1px solid var(--brand);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.response-box li::marker {
+  display: none !important;
+  opacity: 0;
+}
+
+@media (min-width: 990px) {
 }

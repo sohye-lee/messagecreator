@@ -49,7 +49,11 @@ export default function ChatPage() {
     },
   });
 
-  const { mutate: initiate, isPending: initiateLoading } = useMutation({
+  const {
+    mutate: initiate,
+    isPending: initiateLoading,
+    isSuccess: initiateSuccess,
+  } = useMutation({
     mutationFn: () => initiateChat(messageInfo),
     onSuccess: (data: ChatCompletionMessageParam) => {
       if (!data) return;
@@ -68,7 +72,21 @@ export default function ChatPage() {
     setQuestion("");
   };
 
-  useEffect(() => {}, [initiate, ready]);
+  const copytext = (e: Event) => {
+    e.preventDefault();
+    e.currentTarget && console.log("current target:", e.currentTarget);
+    e.target && console.log(" target:", e.target);
+  };
+
+  document.addEventListener("click", function (event) {
+    var ev = event.target as HTMLElement;
+    if (ev.tagName.toLowerCase() === "li") {
+      navigator.clipboard.writeText(ev.innerText);
+      console.log(ev.innerText);
+      toast("copied");
+    }
+  });
+  useEffect(() => {}, [initiate, ready, initiateSuccess]);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <div className=" w-full overflow-auto flex flex-col items-center">

@@ -51,7 +51,7 @@ export default function RootLayout({
         </head>
         <body className={`${GeistSans.className} ${GeistMono.variable} p-0`}>
           <Providers>
-            <Toaster richColors closeButton />
+            <Toaster richColors closeButton visibleToasts={1} />
             {children}
             <Footer />
           </Providers>
