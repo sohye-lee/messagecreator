@@ -86,7 +86,7 @@ ol {
 }
 
 ol li {
-  /* margin: 0.5rem 0; */
+  margin: 0.5rem 0;
 }
 
 .response-box ol,
@@ -98,9 +98,10 @@ ol li {
 }
 
 .response-box li {
-  padding: 1rem;
+  padding: 1.3rem 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
+  position: relative;
 }
 
 .response-box li:hover {
@@ -113,5 +114,23 @@ ol li {
   opacity: 0;
 }
 
-@media (min-width: 990px) {
+.response-box li:hover:after {
+  content: 'Click to Copy';
+  font-size: 10px;
+  letter-spacing: -0.5px;
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-weight: 500;
+  color: var(--brand);
+}
+
+@media (max-width: 990px) {
+  .response-box ol,
+  .response-box ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.5em;
+    list-style: none !important;
+  }
 }

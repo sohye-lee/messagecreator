@@ -1,15 +1,16 @@
-"use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import ChatItem from "./chatItem";
+'use client';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import ChatItem from './chatItem';
 import {
   IconArrowDown,
+  IconDownload,
   IconMessageChatbot,
   IconReload,
-} from "@tabler/icons-react";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
-import { Button } from "../ui/button";
-import { MessageInfo } from "@/lib/types";
-import { initialState } from "@/app/(dashboard)/chat/page";
+} from '@tabler/icons-react';
+import { ChatCompletionMessageParam } from 'openai/resources/chat/completions.mjs';
+import { Button } from '../ui/button';
+import { MessageInfo } from '@/lib/types';
+import { initialState } from '@/app/(dashboard)/chat/page';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,10 +21,12 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { initiateChat } from "@/utils/action";
-import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
+} from '@/components/ui/alert-dialog';
+import { initiateChat, saveChat } from '@/utils/action';
+import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import SmallLoader from '../loading/smallLoader';
+import { toast } from 'sonner';
 interface props {
   messages: ChatCompletionMessageParam[];
   messageInfo: MessageInfo;
@@ -69,16 +72,24 @@ export default function ChatList({
     },
   });
 
+  const { mutate: save, isPending: saveLoading } = useMutation({
+    mutationFn: (messages: string) => saveChat(messages),
+    onSuccess: () => {
+      toast.success('Your messages have been saved!');
+      router.push('/history');
+    },
+  });
+
   const startChat = () => {
     setReady(true);
     initiate();
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", showButton);
+    window.addEventListener('scroll', showButton);
     console.log(messages);
     return () => {
-      window.removeEventListener("scroll", showButton);
+      window.removeEventListener('scroll', showButton);
     };
   }, [router, messages]);
 
@@ -102,7 +113,6 @@ export default function ChatList({
                 <Button
                   className="hover:bg-brand gap-2 group"
                   onClick={() => {
-                    console.log("messages prev:", messages);
                     setMessages([]);
                     setReady(false);
                     setMessageInfo(initialState);
@@ -113,8 +123,19 @@ export default function ChatList({
                   <IconReload width={16} className="group-hover:animate-spin" />
                   Reset
                 </Button>
+                <Button
+                  className="hover:bg-brand gap-2 group"
+                  onClick={() => save(JSON.stringify(messages))}
+                >
+                  <IconDownload width={16} />
+                  Save Chat
+                </Button>
               </div>
             </>
+          ) : initiateLoading ? (
+            <div className="flex min-h-96 justify-center items-center">
+              <SmallLoader />
+            </div>
           ) : (
             <AlertDialog>
               <AlertDialogTrigger className="flex justify-center">
@@ -136,33 +157,33 @@ export default function ChatList({
                     what you&apos;ve selected so far:
                     <ul className="my-3 flex flex-col gap-2">
                       <li>
-                        <span className="font-semibold">Purpose</span>:{" "}
+                        <span className="font-semibold">Purpose</span>:{' '}
                         <span className="text-brand">
                           {messageInfo.purpose}
                         </span>
                       </li>
                       <li>
-                        <span className="font-semibold">Occasion</span>:{" "}
+                        <span className="font-semibold">Occasion</span>:{' '}
                         <span className="text-brand">
                           {messageInfo.occasion}
                         </span>
                       </li>
                       <li>
-                        <span className="font-semibold">Relation</span>:{" "}
+                        <span className="font-semibold">Relation</span>:{' '}
                         <span className="text-brand">
                           {messageInfo.relation}
                         </span>
                       </li>
                       <li>
-                        <span className="font-semibold">Tone</span>:{" "}
+                        <span className="font-semibold">Tone</span>:{' '}
                         <span className="text-brand">{messageInfo.tone}</span>
                       </li>
                       <li>
-                        <span className="font-semibold">Length</span>:{" "}
+                        <span className="font-semibold">Length</span>:{' '}
                         <span className="text-brand">{messageInfo.length}</span>
                       </li>
                       <li>
-                        <span className="font-semibold">Urgency</span>:{" "}
+                        <span className="font-semibold">Urgency</span>:{' '}
                         <span className="text-brand">
                           {messageInfo.urgency}
                         </span>
@@ -172,7 +193,7 @@ export default function ChatList({
                         <span className="text-brand">{messageInfo.theme}</span>
                       </li> */}
                       <li>
-                        <span className="font-semibold">Details</span>:{" "}
+                        <span className="font-semibold">Details</span>:{' '}
                         <span className="text-brand">
                           {messageInfo.details}
                         </span>
@@ -193,13 +214,13 @@ export default function ChatList({
       </div>
       <button
         className={`flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-brand/50 shadow-sm hover:bg-accent hover:text-accent-foreground size-9 fixed left-[50%] bottom-40 -translate-x-[50%] z-[1000] bg-background dark:bg-brand dark:opacity-80 dark:hover:opacity-95 transition-opacity duration-300 ${
-          visible ? "opacity-1" : "opacity-0"
+          visible ? 'opacity-1' : 'opacity-0'
         } `}
         onClick={(e) => {
           e.preventDefault();
           window.scrollTo({
             top: document.body.scrollHeight,
-            behavior: "smooth",
+            behavior: 'smooth',
           });
         }}
       >
