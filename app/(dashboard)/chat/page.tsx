@@ -1,47 +1,38 @@
-'use client';
-import React, { FormEvent, useEffect, useState } from 'react';
-import ChatList from '@/components/chat/chatList';
+"use client";
+import React, { FormEvent, useEffect, useState } from "react";
+import ChatList from "@/components/chat/chatList";
 import {
   QueryClient,
   dehydrate,
   HydrationBoundary,
   useMutation,
-} from '@tanstack/react-query';
-import ChatForm from '@/components/chat/chatForm';
-import { ChatCompletionMessageParam } from 'openai/resources/chat/completions.mjs';
-import { generateChatResponse, initiateChat } from '@/utils/action';
-import { toast } from 'sonner';
-import Step1 from '@/components/form/step1';
-import { MessageInfo } from '@/lib/types';
-import StepBar from '@/components/form/stepBar';
-import Step2 from '@/components/form/step2';
-import Paginator from '@/components/form/paginator';
-import Step3 from '@/components/form/step3';
-import SmallLoader from '@/components/loading/smallLoader';
+} from "@tanstack/react-query";
+import ChatForm from "@/components/chat/chatForm";
+import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
+import { generateChatResponse, initiateChat } from "@/utils/action";
+import { toast } from "sonner";
+import Step1 from "@/components/form/step1";
+import { MessageInfo } from "@/lib/types";
+import StepBar from "@/components/form/stepBar";
+import Step2 from "@/components/form/step2";
+import Paginator from "@/components/form/paginator";
+import Step3 from "@/components/form/step3";
+import SmallLoader from "@/components/loading/smallLoader";
+import { initialState } from "@/lib/constants";
 
-export const initialState = {
-  purpose: '',
-  occasion: '',
-  relation: '',
-  tone: '',
-  length: '',
-  urgency: '',
-  theme: '',
-  details: '',
-};
 export default function ChatPage() {
   const queryClient = new QueryClient();
   const [ready, setReady] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
   const [messageInfo, setMessageInfo] = useState<MessageInfo>(initialState);
-  const [question, setQuestion] = useState<string>('');
+  const [question, setQuestion] = useState<string>("");
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
   const { mutate: sendMessages, isPending } = useMutation({
     mutationFn: (query: ChatCompletionMessageParam) =>
       generateChatResponse([...messages, query]),
     onSuccess: (data: ChatCompletionMessageParam) => {
       if (!data || !data?.content) {
-        toast.error('Something went wrong.');
+        toast.error("Something went wrong.");
         return;
       }
       setMessages((prev) => [...prev, data]);
@@ -63,12 +54,12 @@ export default function ChatPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const query: ChatCompletionMessageParam = {
-      role: 'user',
+      role: "user",
       content: question,
     };
     sendMessages(query);
     setMessages((prev) => [...prev, query]);
-    setQuestion('');
+    setQuestion("");
   };
   // if (typeof document !== 'undefined') {
   //   document.addEventListener('click', function (event) {
@@ -128,5 +119,5 @@ export default function ChatPage() {
   );
 }
 function createBrowserRouter(arg0: any[]): any {
-  throw new Error('Function not implemented.');
+  throw new Error("Function not implemented.");
 }

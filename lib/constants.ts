@@ -8,6 +8,17 @@ export const metadata = {
     "Quick and diverse message creation with just a few taps at your fingertips",
 };
 
+export const initialState = {
+  purpose: "",
+  occasion: "",
+  relation: "",
+  tone: "",
+  length: "",
+  urgency: "",
+  theme: "",
+  details: "",
+};
+
 export const purposes: string[] = [
   "Greetings",
   "Thank Yous",

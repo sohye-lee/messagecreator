@@ -9,6 +9,7 @@ const webhookSecret = env.CLERK_WEBHOOK_SECRET || "";
 
 async function handler(request: Request) {
   const payload = await request.json();
+  console.log("payload:", payload);
   const headersList = headers();
   const heads = {
     "svix-id": headersList.get("svix-id"),
@@ -30,6 +31,7 @@ async function handler(request: Request) {
   }
 
   const eventType: EventType = evt.type;
+  console.log("event type:", eventType);
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
     const user = await db.user.upsert({
