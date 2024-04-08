@@ -88,7 +88,7 @@ export default function ChatList({
 
   useEffect(() => {
     window.addEventListener("scroll", showButton);
-    console.log(messages);
+    // console.log(messages);
     return () => {
       window.removeEventListener("scroll", showButton);
     };
@@ -101,7 +101,7 @@ export default function ChatList({
           {messages && messages.length > 0 && ready ? (
             <>
               {messages.map((message, i) => {
-                console.log(message);
+                // console.log(message);
                 return (
                   <ChatItem
                     key={i}
@@ -126,7 +126,10 @@ export default function ChatList({
                 </Button>
                 <Button
                   className="hover:bg-brand gap-2 group"
-                  onClick={() => save(JSON.stringify(messages))}
+                  onClick={() => {
+                    save(JSON.stringify(messages));
+                    console.log(JSON.stringify(messages));
+                  }}
                 >
                   <IconDownload width={16} />
                   Save Chat

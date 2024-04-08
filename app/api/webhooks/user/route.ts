@@ -29,7 +29,7 @@ async function handler(request: Request) {
   }
 
   const eventType: EventType = evt.type;
-  console.log("event type:", eventType);
+  // console.log("event type:", eventType);
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, ...attributes } = evt.data;
     const user = await db.user.upsert({
