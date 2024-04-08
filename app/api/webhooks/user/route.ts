@@ -19,7 +19,6 @@ async function handler(request: Request) {
   const wh = new Webhook(webhookSecret);
   let evt: Event | null = null;
 
-  console.log("update user started");
   try {
     evt = wh.verify(
       JSON.stringify(payload),
