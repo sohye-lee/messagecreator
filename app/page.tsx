@@ -1,14 +1,20 @@
+"use client";
 import { metadata } from "@/lib/constants";
 import Image from "next/image";
 import LogoBlack from "@images/logo-black.svg";
-
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { auth, SignIn } from "@clerk/nextjs";
+// import { auth } from "@clerk/nextjs";
+import { useSession } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const {} = auth();
+  const session = useSession();
+  const router = useRouter();
+  if (session && session?.isSignedIn) {
+    router.push("/chat");
+  }
   return (
     <main className="flex min-h-screen pt-6 pb-16 flex-col items-center p-0 m-0 bg-[#f8f8fd] dark:bg-background justify-center px-4">
       <div className="max-w-[599px] flex items-center justify-center flex-col gap-3">

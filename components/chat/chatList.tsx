@@ -70,6 +70,7 @@ export default function ChatList({
     onSuccess: (data: ChatCompletionMessageParam) => {
       if (!data) return;
       messages.length == 0 && setMessages([data]);
+      toast.info(data.toString());
     },
   });
 
@@ -78,6 +79,9 @@ export default function ChatList({
     onSuccess: () => {
       toast.success("Your messages have been saved!");
       router.push("/history");
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 

@@ -95,12 +95,15 @@ export const getUserInfo = async () => {
 export const saveChat = async (messages: string) => {
   try {
     const { userId } = auth();
+    console.log(userId);
     if (!userId) return { ok: false, message: "Not a valid request." };
+    const user = await db.user.findFirst({ where: { externalId: userId } });
 
+    if (!user) return { ok: false, message: "No user with this ID." };
     const chat = await db.chat.create({
       data: {
         messages,
-        userId,
+        userId: user.id,
       },
     });
     return { ok: true, chat };

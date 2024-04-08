@@ -32,7 +32,7 @@ model Chat {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId], map:"chat_user_id")
+  @@index([userId], map:"Chat_userId")
 }
  
  
