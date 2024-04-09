@@ -75,7 +75,11 @@ export default function ChatList({
   });
 
   const { mutate: save, isPending: saveLoading } = useMutation({
-    mutationFn: (messages: string) => saveChat(messages),
+    mutationFn: (messages: string) =>
+      saveChat(
+        messages,
+        `${messageInfo.purpose} - ${messageInfo.occasion} - ${messageInfo.relation}`
+      ),
     onSuccess: () => {
       toast.success("Your messages have been saved!");
       router.push("/history");

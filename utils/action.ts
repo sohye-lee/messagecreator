@@ -1,10 +1,11 @@
 "use server";
 import { env } from "@/lib/env";
-import { MessageInfo } from "@/lib/types";
+import { ContactFormData, MessageInfo } from "@/lib/types";
 import { db } from "@/prisma/db";
 import { auth } from "@clerk/nextjs";
 import OpenAi from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
+import nodemailer from "nodemailer";
 
 const openai = new OpenAi({
   apiKey: env.OPENAI_API_KEY,
@@ -92,10 +93,9 @@ export const getUserInfo = async () => {
   }
 };
 
-export const saveChat = async (messages: string) => {
+export const saveChat = async (messages: string, purpose: string) => {
   try {
     const { userId } = auth();
-    console.log(userId);
     if (!userId) return { ok: false, message: "Not a valid request." };
     const user = await db.user.findFirst({ where: { externalId: userId } });
 
@@ -103,6 +103,7 @@ export const saveChat = async (messages: string) => {
     const chat = await db.chat.create({
       data: {
         messages,
+        purpose,
         userId: user.id,
       },
     });
@@ -110,5 +111,70 @@ export const saveChat = async (messages: string) => {
   } catch (error) {
     console.log((error as any).message);
     return { ok: false, user: null, message: "Something went wrong..." };
+  }
+};
+
+export const getChatList = async () => {
+  try {
+    const { userId } = auth();
+    if (!userId) return { ok: false, message: "Please login first." };
+    const user = await db.user.findFirst({ where: { externalId: userId } });
+
+    if (!user) return { ok: false, message: "No user with this ID." };
+    const chats = await db.chat.findMany({
+      where: {
+        userId: user.id,
+      },
+    });
+
+    return { ok: true, chats };
+  } catch (error) {
+    console.log((error as any).message);
+    return { ok: false, chats: null, message: "Something went wrong..." };
+  }
+};
+
+export const getSingleChat = async (id: string) => {
+  try {
+    if (!id) return { ok: false, message: "Not a valid url." };
+    const chat = await db.chat.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!chat) return { ok: false, message: "No chat found." };
+
+    return { ok: true, chat };
+  } catch (error) {
+    console.log((error as any).message);
+    return { ok: false, chat: null, message: "Something went wrong..." };
+  }
+};
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  host: "smtp.gmail.com",
+  auth: {
+    user: env.GOOGLE_EMAIL,
+    pass: env.GOOGLE_PASSWORD,
+  },
+});
+
+export const sendEmail = async (formData: ContactFormData) => {
+  try {
+    const mailOptions = {
+      from: "noreply@blinkmessage.app",
+      to: formData.email,
+      subject: `A message from ${formData.name ?? formData.email}`,
+      text: `${formData.message}`,
+    };
+
+    transporter.sendMail(mailOptions, function (err, info) {
+      if (err) console.log(err);
+      console.log("Email sent:", info.response);
+    });
+  } catch (error) {
+    console.log(error);
   }
 };

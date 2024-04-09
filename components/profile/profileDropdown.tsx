@@ -32,7 +32,9 @@ export default async function ProfileDropdown() {
           <DropdownMenuItem>
             <Link href="/profile">Profile</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>History</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/history">History</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Billing</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
