@@ -35,7 +35,9 @@ export default async function ProfileDropdown() {
           <DropdownMenuItem>
             <Link href="/history">History</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/contact">Contact Us</Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOutButton />

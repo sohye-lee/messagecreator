@@ -11,20 +11,40 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { FormEvent, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function ContactPage() {
+  const router = useRouter();
   const queryClient = useQueryClient();
-  const { register, handleSubmit, watch, reset } = useForm<ContactFormData>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>();
+  const [formData, setFormData] = useState<ContactFormData | null>();
 
   const { mutate: sendMail } = useMutation({
-    mutationFn: () => sendEmail(),
+    mutationFn: (values: ContactFormData) => sendEmail(values),
+    onSuccess: (data) => {
+      toast.success(
+        "Thank you for sending a message. We'll reply back very shortly!"
+      );
+      router.push("/");
+    },
   });
+
+  const onSubmit = (formData: ContactFormData) => {
+    formData && sendMail(formData);
+  };
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="w-full pt-24 pb-8 bg-gradient-to-r from-brand to-gray-700">
-        <div className="mx-auto w-full sm:max-w-xl flex flex-col gap-3 py-6">
+      <div className="w-full pt-20 pb-6 bg-gradient-to-r from-brand to-gray-700">
+        <div className="mx-auto w-full sm:max-w-xl flex flex-col gap-3 pt-2">
           <h1 className="text-3xl font-medium text-center text-white">
             Contact Us
           </h1>
@@ -32,12 +52,22 @@ export default function ContactPage() {
       </div>
       <div className=" w-full overflow-auto flex flex-col items-center px-4">
         <div className="mx-auto w-full sm:max-w-xl flex flex-col gap-3 py-14 ">
-          <form className="flex flex-col gap-3">
-            <Input placeholder="Name" />
+          <form
+            className="flex flex-col gap-3"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Input {...register("name")} placeholder="Full Name" />
 
-            <Input placeholder="Email" />
-            <Input placeholder="Phone (optional)" />
-            <Textarea placeholder="Message" rows={3}></Textarea>
+            <Input
+              {...register("email", { required: "Please enter your email." })}
+              placeholder="Email"
+            />
+            <Input {...register("phone")} placeholder="Phone (optional)" />
+            <Textarea
+              {...register("message")}
+              placeholder="Message"
+              rows={3}
+            ></Textarea>
             <div className="flex justify-end">
               <Button className="gap-2">
                 Send Message

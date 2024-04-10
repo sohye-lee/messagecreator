@@ -78,6 +78,17 @@
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+select {
+  font-family: "Degular", sans-serif;
+  font-weight: 500;
+}
+
 ol {
   list-style: decimal !important;
   /* padding-left: 1.5rem; */
@@ -115,7 +126,7 @@ ol li {
 }
 
 .response-box li:hover:after {
-  content: 'Click to Copy';
+  content: "Click to Copy";
   font-size: 10px;
   letter-spacing: -0.5px;
   position: absolute;

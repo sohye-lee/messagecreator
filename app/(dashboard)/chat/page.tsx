@@ -19,6 +19,7 @@ import Paginator from "@/components/form/paginator";
 import Step3 from "@/components/form/step3";
 import SmallLoader from "@/components/loading/smallLoader";
 import { initialState } from "@/lib/constants";
+import Step0 from "@/components/form/step0";
 
 export default function ChatPage() {
   const queryClient = new QueryClient();
@@ -80,6 +81,7 @@ export default function ChatPage() {
           <div className="py-18 flex justify-center">
             {initiateLoading && <SmallLoader />}
           </div>
+          <Step0 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
           {step == 1 && (
             <Step1 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
           )}

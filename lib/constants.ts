@@ -19,6 +19,15 @@ export const initialState = {
   details: "",
 };
 
+export const lengths: string[] = ["Short", "Mid-Long", "Long"];
+
+export const types: string[] = [
+  "text message",
+  "email",
+  "card message",
+  "letter",
+];
+
 export const purposes: string[] = [
   "Greetings",
   "Thank Yous",
@@ -30,6 +39,26 @@ export const purposes: string[] = [
   "Expressing Feelings",
 ];
 
+export const relationStrings: string[] = [
+  "anyone",
+  "mother",
+  "father",
+  "son",
+  "daughter",
+  "grandchild",
+  "grandparent",
+  "close friend",
+  "best friend",
+  "old friend",
+  "new friend",
+  "classmate",
+  "teachers/professor",
+  "student",
+  "colleague",
+  "boss",
+  "client",
+  "social group",
+];
 export const relations: MessageType[] = [
   {
     category: "Family",
@@ -101,6 +130,25 @@ export const tones: string[] = [
   "Motivational",
 ];
 
+export const occasionStrings: string[] = [
+  "Any",
+  "Christmas",
+  "New Year's Day",
+  "Birthdays",
+  "Anniversaries",
+  "Graduations",
+  "Promotions",
+  "Retirements",
+  "New Jobs or Roles",
+  "Engagements",
+  "Weddings",
+  "New Baby",
+  "Starting School",
+  "Moving In",
+  "Moving Out",
+  "Professional Recognition",
+  "Personal Achievements",
+];
 export const occasions: MessageType[] = [
   {
     category: "Holidays/Special Day",
@@ -152,8 +200,6 @@ export const urgencies: string[] = [
   "Routine",
   "Whenever Convenient",
 ];
-
-export const lengths: string[] = ["Short", "Medium", "Long"];
 
 export const themes: string[] = [
   "Nature",

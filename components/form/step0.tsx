@@ -1,0 +1,192 @@
+"use client";
+import { MessageInfo } from "@/lib/types";
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Input } from "../ui/input";
+import {
+  lengths,
+  occasionStrings,
+  occasions,
+  purposes,
+  relationStrings,
+  tones,
+  types,
+} from "@/lib/constants";
+import { Button } from "@nextui-org/react";
+import { IconChevronDown, IconCornerDownLeft } from "@tabler/icons-react";
+
+export default function Step0({
+  messageInfo,
+  setMessageInfo,
+}: {
+  messageInfo: MessageInfo;
+  setMessageInfo: Dispatch<SetStateAction<MessageInfo>>;
+}) {
+  const [purpose, setPurpose] = useState("");
+  const [occasion, setOccasion] = useState("");
+
+  const onPurposeChange = (purpose: string) => {
+    setMessageInfo((prev) => ({ ...prev, purpose }));
+    setPurpose("");
+  };
+
+  const onOccasionChange = (occasion: string) => {
+    setMessageInfo((prev) => ({ ...prev, occasion: occasion }));
+    setOccasion("");
+  };
+  return (
+    <div className="w-full flex flex-col gap-4">
+      <div className=" py-5 px-3 rounded-md flex flex-col gap-3 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <h2 className="text-4xl leading-[1.6]">
+          Craft me a{" "}
+          <select className="inline-select inline-block min-w-0 px-3 w-auto border rounded-[50px] border-brand bg-purple-100">
+            {lengths.map((l, i) => (
+              <option key={i} value="">
+                {l}
+              </option>
+            ))}
+          </select>{" "}
+          <select className="inline-select inline-block min-w-0 px-3 w-auto border rounded-[50px] border-brand bg-purple-100">
+            {types.map((t, i) => (
+              <option key={i} value="">
+                {t}
+              </option>
+            ))}
+          </select>{" "}
+          for a
+          <select className="inline-select inline-block min-w-0 px-3 w-auto border rounded-[50px] border-brand bg-purple-100">
+            {purposes.map((p, i) => (
+              <option key={i} value="">
+                {p}
+              </option>
+            ))}
+          </select>{" "}
+          occasion, like
+          <select className="inline-select inline-block min-w-0 px-3 w-auto border rounded-[50px] border-brand bg-purple-100">
+            {occasionStrings.map((o, i) => (
+              <option key={i} value="">
+                {o}
+              </option>
+            ))}
+          </select>{" "}
+          , aimed at my{" "}
+          <select className="inline-select inline-block min-w-0 px-3 w-auto border rounded-[50px] border-brand bg-purple-100">
+            {relationStrings.map((r, i) => (
+              <option key={i} value="">
+                {r}
+              </option>
+            ))}
+          </select>{" "}
+          with a touch of{" "}
+          <select className="inline-select inline-block min-w-0 px-3 w-auto border rounded-[50px] border-brand bg-purple-100">
+            {tones.map((t, i) => (
+              <option key={i} value="">
+                {t}
+              </option>
+            ))}
+          </select>{" "}
+          flair.
+        </h2>
+      </div>
+      {/* Purpose */}
+      <div className=" py-5 px-3 rounded-md flex flex-col gap-3 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <div className=" mb-2 flex flex-col gap-1">
+          <div className="text-lg font-medium  ">Purpose</div>
+          <div className="py-2 px-3 text-[16px] font-light text-brand bg-gray-100 border border-gray-300 rounded-lg w-3/4">
+            {messageInfo.purpose != ""
+              ? messageInfo.purpose
+              : "Please select or write below"}
+          </div>
+        </div>
+        <div className="flex flex-wrap items-stretch gap-1">
+          {purposes.map((p, i) => (
+            <button
+              key={i}
+              onClick={() => onPurposeChange(p)}
+              className="px-4 py-2 rounded-[30px] text-sm bg-black text-white dark:bg-brand dark:text-black dark:hover:bg-gray-600 hover:bg-brand hover:text-white"
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+        <form
+          className="w-full my-3 relative "
+          onSubmit={(e) => {
+            e.preventDefault();
+            setMessageInfo((prev) => ({ ...prev, purpose }));
+          }}
+        >
+          <Input
+            type="text"
+            className="h-[48px] pr-16 relative"
+            placeholder="Other "
+            value={purpose}
+            onChange={(e) => setPurpose(e.target.value)}
+          />
+          <Button
+            type="submit"
+            className="absolute top-[50%] right-2 -translate-y-[50%] bg-black text-white dark:bg-brand dark:text-black dark:hover:bg-gray-600 hover:bg-brand px-2 py-1 rounded-md "
+          >
+            <IconCornerDownLeft width={20} />
+          </Button>
+        </form>
+      </div>
+
+      {/* Occasion */}
+      <div className=" py-5 px-3 rounded-md flex flex-col gap-3 hover:bg-slate-100 dark:hover:bg-slate-800">
+        <div className=" mb-2 flex flex-col gap-1">
+          <div className="text-xl font-medium  ">Occasion</div>
+          <div className="py-2 px-3 text-[16px] font-light text-brand bg-gray-100 border border-gray-300 rounded-lg w-3/4 overflow-x-auto overflow-hidden text-wrap break-before-all">
+            {messageInfo.occasion != ""
+              ? messageInfo.occasion
+              : "Please select or write below"}
+          </div>
+        </div>
+        <div className="flex flex-wrap items-stretch gap-1">
+          {occasions.map((o, i) => (
+            <div className="relative" key={i}>
+              <select
+                className="relative appearance-none px-4 py-2 pr-10 rounded-[30px] text-sm bg-black text-white dark:bg-brand dark:hover:bg-gray-600 dark:text-black hover:bg-brand hover:text-white"
+                onChange={(e) => onOccasionChange(e.currentTarget.value)}
+                defaultValue={""}
+              >
+                <option value="" disabled>
+                  {o.category}
+                </option>
+                {o.list.map((l) => (
+                  <option key={l} value={l}>
+                    {l}
+                  </option>
+                ))}
+              </select>
+              <IconChevronDown
+                className="absolute top-[50%] right-2 z-[10] text-white dark:text-black -translate-y-[50%] "
+                width={16}
+              />
+            </div>
+          ))}
+        </div>
+        <form
+          className="w-full my-3 relative "
+          onSubmit={(e) => {
+            e.preventDefault();
+            setMessageInfo((prev) => ({ ...prev, occasion }));
+          }}
+        >
+          <Input
+            type="text"
+            className="h-[48px] pr-16 relative"
+            placeholder="Other "
+            value={occasion}
+            onChange={(e) => setOccasion(e.target.value)}
+          />
+          <Button
+            type="submit"
+            className="absolute top-[50%] right-2 -translate-y-[50%] bg-black text-white dark:bg-brand dark:hover:bg-gray-600 dark:text-black hover:bg-brand px-2 py-1 rounded-md "
+          >
+            <IconCornerDownLeft width={20} />
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+}

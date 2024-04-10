@@ -46,6 +46,7 @@ export default function RootLayout({
             href="favicon/safari-pinned-tab.svg"
             color="#113ede"
           />
+          <link rel="stylesheet" href="https://use.typekit.net/fsn1sns.css" />
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="theme-color" content="#ffffff"></meta>
         </head>

@@ -163,6 +163,7 @@ const transporter = nodemailer.createTransport({
 
 export const sendEmail = async (formData: ContactFormData) => {
   try {
+    console.log("form data received:", formData);
     const mailOptions = {
       from: "noreply@blinkmessage.app",
       to: formData.email,
@@ -172,7 +173,8 @@ export const sendEmail = async (formData: ContactFormData) => {
 
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) console.log(err);
-      console.log("Email sent:", info.response);
+      console.log("info:", info);
+      console.log("Email sent:");
     });
   } catch (error) {
     console.log(error);
