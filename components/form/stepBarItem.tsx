@@ -14,7 +14,7 @@ export default function StepBarItem({ no, step, setStep, title }: props) {
       className={`relative flex items-center justify-center px-2 py-3 w-1/3 cursor-pointer border-t-[5px]  ${
         step == no
           ? "border-t-brand"
-          : "border-t-gray-500 dark:border-t-gray-700 opacity-80"
+          : "border-t-white  dark:border-t-gray-700 opacity-80"
       }`}
       onClick={() => setStep(no)}
     >
@@ -22,8 +22,8 @@ export default function StepBarItem({ no, step, setStep, title }: props) {
         <p
           className={`${
             step == no
-              ? "text-brand text-xl animate-pulse"
-              : "text-gray-500 dark:text-gray-700 font-light"
+              ? "text-brand text-md md:text-lg animate-pulse"
+              : "text-gray-600 dark:text-gray-700 font-light"
           }`}
         >
           {title}

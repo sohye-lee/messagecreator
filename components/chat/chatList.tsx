@@ -156,7 +156,7 @@ export default function ChatList({
                   <IconMessageChatbot width={24} />
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="max-w-[95vw] mx-auto">
                 <AlertDialogHeader>
                   <AlertDialogTitle>
                     <h3 className="text-3xl mb-3">

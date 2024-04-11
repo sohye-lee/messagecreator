@@ -20,7 +20,7 @@ export const generateChatResponse = async (
         {
           role: "system",
           content:
-            "You are a helpful assistant who helps with writing other messages for email, cards and texts",
+            "You are a helpful assistant who helps with writing other messages for email, cards and texts. For the options, always return list of 5 options, all in HTML code.",
         },
         ...chatMessages,
       ],
@@ -41,9 +41,10 @@ export const initiateChat = async (messageInfo: MessageInfo) => {
         {
           role: "system",
           content: `You are a helpful assistant who helps with writing other messages for email, cards and texts. Please remind the list below: 
-            1. Return without any explanation or question. Please return only a list. 
-            2. Return all the responses in HTML format, and when you return a list of answers (1,2,3,), please return it as a HTML list (<ul><li></li></ul>).
-            3. Don't answer to any other questions or requests else than creating a message..`,
+            1. Return without any explanation or question.
+            2. For the options, return a list of 5.
+            3. Return all the responses in HTML format, and when you return a list of options of 5, please return it as a HTML list (<ul><li></li></ul>). Do not use HTML list form inside one block of email or letter.
+            4. Don't answer to any other questions or requests else than creating a message..`,
         },
         {
           role: "assistant",
