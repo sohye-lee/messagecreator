@@ -29,7 +29,7 @@ export default function Step3({
             <div key={i} className="flex items-center gap-2 ">
               <button
                 onClick={() => onUrgencyChange(u)}
-                className={`w-8 h-8   border-2 flex items-center justify-center border-gray-300 rounded-full ${
+                className={`w-8 h-8 shrink-0 border-2 flex items-center justify-center border-gray-300 rounded-full ${
                   messageInfo.urgency == u &&
                   "border-indigo-400 bg-brand text-white"
                 }`}
@@ -38,7 +38,7 @@ export default function Step3({
                   <IconCheck width={16} className="text-white" />
                 )}
               </button>
-              <h4 className=" text-xl font-medium">{u}</h4>
+              <h4 className=" text-xl font-medium ">{u}</h4>
             </div>
           ))}
         </div>

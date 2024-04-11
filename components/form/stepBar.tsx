@@ -8,7 +8,7 @@ interface props {
 }
 export default function StepBar({ step, setStep }: props) {
   return (
-    <div className="w-full flex mb-5">
+    <div className="w-full flex mb-5 px-3">
       {steps.map((s, i) => (
         <StepBarItem
           key={i}
