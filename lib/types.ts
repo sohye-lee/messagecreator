@@ -6,13 +6,13 @@ export interface MessageType {
 }
 
 export interface MessageInfo {
+  type: string;
   purpose: string;
   occasion: string;
   relation: string;
   tone: string;
   length: string;
   urgency: string;
-  theme: string;
   details: string;
 }
 

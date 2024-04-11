@@ -47,17 +47,15 @@ export const initiateChat = async (messageInfo: MessageInfo) => {
         },
         {
           role: "assistant",
-          content: `Please say hi to the user who just entered in 1-2 sentences. 
-            Introduce yourself as an assistant who help write messages for cards, emails, letters or texts in any occasion, event or purpose. 
-            Create your own way to say hi. \n
-            Then provide  10 numbered list of the messages you create based on the information on the message given below:\n
+          content: `
+            Start by providing a list of 5 messages you create based on the information on the message given below:\n
+            Type of message: ${messageInfo.type}
             Purpose: ${messageInfo.purpose}, 
             Occasion: ${messageInfo.occasion}, 
-            Relation of the user to the person that receives this message: ${messageInfo.relation}, 
+            Relation of the recipient to the writer: ${messageInfo.relation}, 
             Tone: ${messageInfo.tone}, 
             Length: ${messageInfo.length},
-            Urgency: ${messageInfo.urgency}, 
-            Theme: ${messageInfo.theme}, 
+            Urgency of reply: ${messageInfo.urgency}, 
             Other details from user: ${messageInfo.details}, \n
             And then please ask the user if there is any other thing to discuss or modify or edit on the message list that you provided.
             Please be friendly and *important: Please provide your response in HTML code, and for the list of the message, please number each them in HTML numbered list(<ol><li></li></ol>) and give some double space between them.

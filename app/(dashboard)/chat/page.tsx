@@ -81,18 +81,19 @@ export default function ChatPage() {
           <div className="py-18 flex justify-center">
             {initiateLoading && <SmallLoader />}
           </div>
-          <Step0 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
+
           {step == 1 && (
-            <Step1 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
+            <Step0 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
+            // <Step1 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
           )}
           {step == 2 && (
-            <Step2 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
-          )}
-          {step == 3 && (
             <Step3 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
           )}
+          {/* {step == 3 && (
+            <Step2 messageInfo={messageInfo} setMessageInfo={setMessageInfo} />
+          )} */}
 
-          {step == 4 && (
+          {step == 3 && (
             <div>
               <ChatList
                 messages={messages}
@@ -112,7 +113,7 @@ export default function ChatPage() {
             </div>
           )}
 
-          {step < 4 && (
+          {step < 3 && (
             <Paginator step={step} setStep={setStep} setReady={setReady} />
           )}
         </div>

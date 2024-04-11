@@ -151,23 +151,66 @@ export default function ChatList({
           ) : (
             <AlertDialog>
               <AlertDialogTrigger className="flex justify-center">
-                <Button className="bg-brand text-white hover:bg-slate-500 flex items-center gap-2">
-                  <span>Chat with AI to Tune</span>
-                  <IconMessageChatbot width={20} />
+                <Button className="bg-brand text-white hover:bg-slate-500 flex items-center gap-3 px-5 py-4">
+                  <h3 className="text-xl">Chat with AI to Tune</h3>
+                  <IconMessageChatbot width={24} />
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>
-                    Fine-Tune Your Message with AI!
+                    <h3 className="text-3xl mb-3">
+                      Fine-Tune Your Message with AI!
+                    </h3>
                   </AlertDialogTitle>
                   <AlertDialogDescription>
                     Looks like you&apos;re almost ready to create your perfect
-                    message. Would you like to chat with our AI assistant to
-                    refine your details? This quick chat can help ensure your
-                    message captures exactly what you want to say. Here&apos;s
-                    what you&apos;ve selected so far:
-                    <ul className="my-3 flex flex-col gap-2">
+                    message. You can have a chat with our AI assistant to refine
+                    your details on the next page. Here&apos;s what you&apos;ve
+                    selected so far:
+                    <h4 className="text-2xl font-light py-2 my-3 text-gray-800  dark:text-gray-400 px-4 border rounded-md">
+                      Craft me a{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.length}
+                      </span>{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.type}
+                      </span>{" "}
+                      to{" "}
+                      <span className="text-brand font-mediumd">
+                        {messageInfo.purpose}
+                      </span>{" "}
+                      , for{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.occasion}
+                      </span>{" "}
+                      , aimed at my{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.relation}
+                      </span>{" "}
+                      with a touch of{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.tone}
+                      </span>{" "}
+                      flair.
+                    </h4>
+                    <h4 className="text-xl font-light py-2 my-3 text-gray-800 dark:text-gray-400 px-4 border rounded-md">
+                      Urgency:{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.urgency}
+                      </span>
+                    </h4>
+                    <h4 className="text-xl font-light py-2 my-3 text-gray-800 dark:text-gray-400  px-4 border rounded-md">
+                      Details:{" "}
+                      <span className="text-brand font-medium">
+                        {messageInfo.details}
+                      </span>
+                    </h4>
+                    {/* <ul className="my-3 flex flex-col gap-2">
+                      <li>
+                        <span className="font-semibold">Type</span>:{" "}
+                        <span className="text-brand">{messageInfo.type}</span>
+                      </li>
                       <li>
                         <span className="font-semibold">Purpose</span>:{" "}
                         <span className="text-brand">
@@ -181,7 +224,10 @@ export default function ChatList({
                         </span>
                       </li>
                       <li>
-                        <span className="font-semibold">Relation</span>:{" "}
+                        <span className="font-semibold">
+                          Relation of the recipient to you
+                        </span>
+                        :{" "}
                         <span className="text-brand">
                           {messageInfo.relation}
                         </span>
@@ -200,22 +246,23 @@ export default function ChatList({
                           {messageInfo.urgency}
                         </span>
                       </li>
-                      {/* <li>
-                        <span className="font-semibold">Theme</span>:{" "}
-                        <span className="text-brand">{messageInfo.theme}</span>
-                      </li> */}
                       <li>
                         <span className="font-semibold">Details</span>:{" "}
                         <span className="text-brand">
                           {messageInfo.details}
                         </span>
                       </li>
-                    </ul>
+                    </ul> */}
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Go Back</AlertDialogCancel>
-                  <AlertDialogAction onClick={startChat}>
+                  <AlertDialogCancel className="py-5 px-5 rounded-[50px]">
+                    Go Back
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={startChat}
+                    className="py-5 px-5 rounded-[50px]"
+                  >
                     Chat Now
                   </AlertDialogAction>
                 </AlertDialogFooter>

@@ -1,17 +1,11 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent } from "react";
 import { IconCornerDownLeft } from "@tabler/icons-react";
-import { useMutation } from "@tanstack/react-query";
-import { generateChatResponse } from "@/utils/action";
-import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
-import { toast } from "sonner";
 import { Input } from "../ui/input";
 
 interface props {
   question: string;
   setQuestion: (value: string) => void;
-  // messages: ChatCompletionMessageParam[];
-  // setMessages: (values: ChatCompletionMessageParam[]) => void;
   handleSubmit: (e: FormEvent) => void;
   isLoading: boolean;
 }
@@ -19,8 +13,6 @@ interface props {
 export default function ChatForm({
   question,
   setQuestion,
-  // messages,
-  // setMessages,
   handleSubmit,
   isLoading = false,
 }: props) {
@@ -33,12 +25,12 @@ export default function ChatForm({
         </div>
         <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:pt-4 pb-7">
           <form onSubmit={handleSubmit}>
-            <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background pr-8 sm:rounded-md sm:border sm:pr-12">
+            <div className="relative flex max-h-60 w-full grow flex-col   bg-background p-0 sm:rounded-md  border-none ">
               <Input
                 tabIndex={0}
                 type="text"
                 placeholder="Send a message."
-                className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm h-[62px]"
+                className="min-h-[60px] w-full resize-none bg-transparent px-4  py-[1.3rem] focus-within:outline-none sm:text-sm h-[62px]  border pr-16 sm:pr-20"
                 spellCheck={false}
                 autoComplete="off"
                 autoCorrect="off"

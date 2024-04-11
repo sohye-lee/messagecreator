@@ -8,20 +8,10 @@ export const metadata = {
     "Quick and diverse message creation with just a few taps at your fingertips",
 };
 
-export const initialState = {
-  purpose: "",
-  occasion: "",
-  relation: "",
-  tone: "",
-  length: "",
-  urgency: "",
-  theme: "",
-  details: "",
-};
-
 export const lengths: string[] = ["Short", "Mid-Long", "Long"];
 
 export const types: string[] = [
+  "any message",
   "text message",
   "email",
   "card message",
@@ -29,14 +19,22 @@ export const types: string[] = [
 ];
 
 export const purposes: string[] = [
-  "Greetings",
-  "Thank Yous",
-  "Congratulations",
-  "Apologies",
-  "Invitations",
-  "Announcements",
-  "Reminders",
-  "Expressing Feelings",
+  // "greetings",
+  // "thank yous",
+  // "congratulations",
+  // "apologies",
+  // "invitations",
+  // "announcements",
+  // "reminders",
+  // "expressing feelings",
+  "send a warm greeting",
+  "express heartfelt thanks",
+  "offer heartfelt congratulations",
+  "extend a sincere apology",
+  "extend an inviting hand",
+  "share an exciting announcement",
+  "drop a friendly reminder",
+  "convey deep feelings",
 ];
 
 export const relationStrings: string[] = [
@@ -59,6 +57,68 @@ export const relationStrings: string[] = [
   "client",
   "social group",
 ];
+
+export const tones: string[] = [
+  "friendly",
+  "formal",
+  "humorous",
+  "sincere",
+  "sympathetic",
+  "motivational",
+  "cheering",
+];
+
+export const occasionStrings: string[] = [
+  "regular day",
+  "Christmas",
+  "New Year's Day",
+  "birthday",
+  "anniversary",
+  "graduation",
+  "promotion",
+  "retirement",
+  "new job",
+  "new role",
+  "engagement",
+  "wedding",
+  "new baby",
+  "starting school",
+  "moving in",
+  "moving out",
+  "professional recognition",
+  "personal achievements",
+];
+
+export const urgencies: string[] = [
+  "Just Dropping By - No Rush, Whenever The Recipient Has a Moment! 💌",
+  "A Little Nudge - The Reply Would Be the Icing on the Cake! 🍩",
+  "Kinda Urgent - Hoping for Swift Sprinkle of Attention! 🌟",
+  "Urgent! Needs Eyes Now! 🔥",
+];
+
+export const steps: string[] = [
+  // "Purpose & Occasion",
+  // "Relation & Tone",
+  // "Details",
+  // "Chat to Tune",
+  "Kneading the Dough",
+  "Frosting the Details",
+  "Baking to Perfection",
+];
+
+export const initialState = {
+  type: types[0],
+  purpose: purposes[0],
+  occasion: occasionStrings[0],
+  relation: relationStrings[0],
+  tone: tones[0],
+  length: lengths[0],
+  urgency: urgencies[0],
+  details: "",
+};
+
+// ARCHIVE
+
 export const relations: MessageType[] = [
   {
     category: "Family",
@@ -121,34 +181,6 @@ export const relations: MessageType[] = [
   },
 ];
 
-export const tones: string[] = [
-  "Friendly",
-  "Formal",
-  "Humorous",
-  "Sincere",
-  "Sympathetic",
-  "Motivational",
-];
-
-export const occasionStrings: string[] = [
-  "Any",
-  "Christmas",
-  "New Year's Day",
-  "Birthdays",
-  "Anniversaries",
-  "Graduations",
-  "Promotions",
-  "Retirements",
-  "New Jobs or Roles",
-  "Engagements",
-  "Weddings",
-  "New Baby",
-  "Starting School",
-  "Moving In",
-  "Moving Out",
-  "Professional Recognition",
-  "Personal Achievements",
-];
 export const occasions: MessageType[] = [
   {
     category: "Holidays/Special Day",
@@ -195,24 +227,11 @@ export const occasions: MessageType[] = [
   },
 ];
 
-export const urgencies: string[] = [
-  "Immediate",
-  "Routine",
-  "Whenever Convenient",
-];
-
-export const themes: string[] = [
-  "Nature",
-  "Technology",
-  "Love",
-  "Art and Culture",
-  "Sports",
-  "Finance",
-];
-
-export const steps: string[] = [
-  "Purpose & Occasion",
-  "Relation & Tone",
-  "Details",
-  "Chat to Tune",
-];
+// export const themes: string[] = [
+//   "Nature",
+//   "Technology",
+//   "Love",
+//   "Art and Culture",
+//   "Sports",
+//   "Finance",
+// ];
