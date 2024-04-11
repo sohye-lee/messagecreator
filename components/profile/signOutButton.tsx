@@ -10,8 +10,7 @@ export default function SignOutButton() {
   return (
     <button
       onClick={() => {
-        signOut();
-        router.push("/");
+        signOut(() => router.push("/"));
       }}
     >
       Logout
