@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import React from "react";
-import BgImg from "@images/bg-image-1.jpg";
+import BgImg from "@images/bg-image-2.jpg";
 import Image from "next/image";
 
 export default function RootLayout({

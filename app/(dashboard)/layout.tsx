@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import React from "react";
-import BgImg from "@images/bg-image-1.jpg";
+import BgImg from "@images/bg-image-2.jpg";
 import Image from "next/image";
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
           fill
           src={BgImg}
           alt="background"
-          className="w-full absolute top-0 left-0 object-cover z-0 opacity-30 dark:hidden"
+          className="w-full absolute top-0 left-0 object-cover z-0 opacity-50 dark:hidden"
         />
         <div className="relative z-10 w-full h-full flex flex-col items-center">
           {children}
